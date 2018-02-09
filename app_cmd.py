@@ -1,5 +1,6 @@
 import sys
 import gaia
+import base64
 
 from marionette_driver import By
 from marionette_driver import Wait
@@ -16,10 +17,12 @@ def main(argv):
         print """Synopsis:   
             %s command[run/capture/press/getpref/getsettings/setsettings] [app_name/file_name/key_name/settings_name]
 example:
-            %s run message
+            %s run camera
             %s capture screenshot.png
             %s press home
-                    """%(argv[0],argv[0],argv[0],argv[0])
+            %s getprop/setprop [key,(value)]
+            %s getsetting/setsetting [key,(value)]
+                    """%(argv[0],argv[0],argv[0],argv[0],argv[0],argv[0])
         exit()
 
     print "open port"
