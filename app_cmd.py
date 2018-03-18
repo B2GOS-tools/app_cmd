@@ -1,3 +1,4 @@
+#Goof create
 import sys
 import gaia
 import base64
@@ -6,6 +7,8 @@ from marionette_driver import By
 from marionette_driver import Wait
 from marionette import Marionette
 #from marionette_driver.marionette import Marionette
+
+SPLIT_SYM = "="
 
 def main(argv):
 
@@ -20,9 +23,9 @@ example:
             %s run camera
             %s capture screenshot.png
             %s press home
-            %s getprop/setprop [key,(value)]
-            %s getsetting/setsetting [key,(value)]
-                    """%(argv[0],argv[0],argv[0],argv[0],argv[0],argv[0])
+            %s getprop/setprop [key%s(value)]
+            %s getsetting/setsetting [key%s(value)]
+                    """%(argv[0],argv[0],argv[0],argv[0],argv[0],SPLIT_SYM,argv[0],SPLIT_SYM)
         exit()
 
     print "open port"
@@ -71,9 +74,9 @@ example:
         dev_manager.press_button(name);
     elif(cmd == "getpref"):
         pref = client.get_pref(name)
-        print "%s: %s" % (name,pref);
+        print "%s%s%s" % (name,SPLIT_SYM,pref);
     elif(cmd == "setpref"):
-        pref, value = map(str, name.split(","))
+        pref, value = map(str, name.split(SPLIT_SYM))
         if(value == "true"): value = true
         if(value == "false"): value = false
         if(value.isdigit()): value = int(value)
@@ -83,9 +86,9 @@ example:
         else: print "failed#### %s:%s" % (pref,prefs)
     elif(cmd == "getsettings"):
         settings = data_manager.get_setting(name)
-        print "%s: %s" % (name,settings);
+        print "%s%s%s" % (name,SPLIT_SYM,settings);
     elif(cmd == "setsettings"):
-        setting, value = map(str, name.split(","))
+        setting, value = map(str, name.split(SPLIT_SYM))
         data_manager.set_setting(setting, value)
         settings = data_manager.get_setting(setting)
         if(value == settings): print "%s successful change to %s" % (setting,value)

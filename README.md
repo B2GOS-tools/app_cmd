@@ -5,7 +5,9 @@ app_cmd.py run [app name]
            capture [pic].png  
            press [key code]  
            getprop [key]  
-           setprop "[key],[value]"  
+           setprop "[key]=[value]"
+	   getsettings [key]
+	   setsettings [key]=[value]
 
 ## configure environment:
 sudo pip install marionette-client  
